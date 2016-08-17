@@ -4,4 +4,3 @@ Natural Contact Form is a WordPress plugin providing easy to create and use cont
 
 It is currently in development... coming soon!
 
-Check out the development branch for the current state of the project.

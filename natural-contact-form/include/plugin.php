@@ -83,7 +83,7 @@ class Plugin {
     }
   
     foreach (self::$files as $file) {
-      require self::$path . 'include/' . $file . '.php';
+      require_once self::$path . 'include/' . $file . '.php';
     }
   }
 }

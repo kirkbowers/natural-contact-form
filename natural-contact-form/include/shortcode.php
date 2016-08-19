@@ -134,14 +134,16 @@ EOF;
     <div class="form-label-and-textarea">
 EOF;
     
-    $result .=  '<label>' .  $contact_form->get('message_label') . '</label>';
+    if ($contact_form->get('display_message')) {
+      $result .=  '<label>' .  $contact_form->get('message_label') . '</label>';
 
-    $result .= '<textarea id="natural-contact-message" name="message">';
-    if ($errors) {
-      $result .= esc_textarea($_POST['message']);
+      $result .= '<textarea id="natural-contact-message" name="message">';
+      if ($errors) {
+        $result .= esc_textarea($_POST['message']);
+      }
+      $result .= '</textarea>';
     }
-    $result .= '</textarea>';
-    
+        
     $submit_label = $contact_form->get('submit_label');
     
     $result .= <<<EOF

@@ -114,6 +114,11 @@ function display_page_edit_form() {
   );
   
   $form_opts[] = array(
+    'type' => 'checkbox',
+    'name' => 'display_message',
+  );
+  
+  $form_opts[] = array(
     'type' => 'text',
     'name' => 'submit_label',
     'title' => __('Submit Button Label', 'natural-contact-form'),

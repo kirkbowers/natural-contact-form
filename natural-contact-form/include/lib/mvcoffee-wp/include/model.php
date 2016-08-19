@@ -42,7 +42,7 @@ class Model {
 
   static protected function create_or_alter_table() {
     global $wpdb;
-
+    
     $installed_ver = get_option( static::version_option_name() );
 
     if ( $installed_ver != static::VERSION ) {
@@ -71,14 +71,17 @@ class Model {
   static protected function drop_table() {
     global $wpdb;
 
+    error_log("<<< drop_table");
     $table_name = static::table_name();
   
     $charset_collate = $wpdb->get_charset_collate();
 
     $sql = "DROP TABLE IF EXISTS $table_name;";
+    error_log($sql);
   
     $wpdb->query($sql);
 
+    error_log("Done with drop query");
     delete_option(static::version_option_name(), static::VERSION);
   }
     
@@ -98,11 +101,30 @@ class Model {
   //
   // Validations
   
+  private static $types_hash    = array();
   private static $displays_hash    = array();
   private static $validations_hash = array();
   
   public $errors = array();
   public $errors_for_field = array();
+
+  public static function types($field, $type) {
+    $classname = get_called_class();
+  
+    if (!isset(self::$types_hash[$classname])) {
+      self::$types_hash[$classname] = array();
+    }
+    self::$types_hash[$classname][$field] = $type;
+  }
+
+  public static function type_for_field($field) {
+    $classname = get_called_class();
+    if (isset(self::$types_hash[$classname][$field])) {
+      return self::$types_hash[$classname][$field];
+    } 
+    
+    return null;
+  }
 
 
   /**
@@ -293,7 +315,7 @@ class Model {
     return $record;
   }
 
-  public static function count($constraints = array()) {
+  public static function count($constraints = null) {
     global $wpdb;
     
     $table_name = static::table_name();
@@ -313,7 +335,17 @@ class Model {
   public function set($infields) {
     foreach (static::$fields as $field_name => $options) {
       if (isset($infields[$field_name])) {
-        $this->values[$field_name] = $infields[$field_name];
+        if (static::type_for_field($field_name) == 'boolean') {
+          $result = 0;
+          $value = $infields[$field_name];
+
+          if ($value) {
+            $result = 1;
+          }
+          $this->values[$field_name] = $result;
+        } else {
+          $this->values[$field_name] = $infields[$field_name];
+        }
       }
     }
   }

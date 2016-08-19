@@ -41,6 +41,7 @@ class BaseEditForm {
     'text',
     'textarea',
     'radio',
+    'checkbox',
     'hidden',
   );
   
@@ -102,12 +103,19 @@ class BaseEditForm {
     <?php
   }
   
-  public function render_label($field) {
+  public function get_label($field) {
     if (isset($field['title'])) {
       $label = $field['title'];
     } else {
       $label = $this->get_label_for_field($field);
     }
+
+    return $label;  
+  }
+  
+  public function render_label($field) {
+    $label = $this->get_label($field);
+  
     ?>
       <th scope="row">
         <label for="<?php echo $field['name'] ?>"><?php echo $label ?></label>
@@ -156,7 +164,7 @@ class BaseEditForm {
     <tr>
       <?php $this->render_label($field); ?>
       <td>
-        <fieldset><legend class="screen-reader-text"><span>Date Format</span></legend>
+        <fieldset><legend class="screen-reader-text"><span><?php echo $this->get_label($field) ?></span></legend>
     <?php
     $field_value = $this->get_defaulted_value_for_field($field);
     foreach ($field['values'] as $value) {
@@ -173,6 +181,30 @@ class BaseEditForm {
     }
     ?>
         </fieldset>
+      </td>
+    </tr>
+    <?php
+  }
+
+  public function render_checkbox($field) {
+    ?>
+    <tr>
+      <?php $this->render_label($field); ?>
+      <td>
+    <?php
+    $field_value = $this->get_defaulted_value_for_field($field);
+    ?>
+        <input type="hidden" name="<?php echo $field['name'] ?>" value="">
+
+        <input type="checkbox" name="<?php echo $field['name'] ?>" <?php if ($field_value == 1) echo ' checked' ?>>
+    <?php
+
+    if (isset($field['desc'])) {
+    ?>
+      <p><?php echo $field['desc'] ?></p>
+    <?php
+    }
+    ?>
       </td>
     </tr>
     <?php

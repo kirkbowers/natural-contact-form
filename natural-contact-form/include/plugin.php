@@ -2,7 +2,7 @@
 namespace com\kirkbowers\naturalcontactform;
 
 class Plugin {
-  const VERSION = '0.1.0';
+  const VERSION = '0.2.0';
 
   private static $libs = array(
     'mvcoffee-wp',

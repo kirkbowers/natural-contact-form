@@ -6,11 +6,62 @@ class Shortcode {
   private static $error_message = '';
   private static $contact_form;
   
+  private static function flash_cookie_name() {
+    return Plugin::PREFIX . "flash";
+  }
+  
   public static function cookie_name($slug) {
     return Plugin::PREFIX . 'success_' . $slug;
   }
 
+  public static function set_flash_error_message($slug, $message) {
+    self::set_flash_value(self::error_message_flash_name($slug), $message);
+  }
+
+  public static function error_message_flash_name($slug) {
+    return Plugin::PREFIX . 'error_' . $slug;
+  }
+  
+  public static function get_flash_value($name) {
+    if (isset($_COOKIE[self::flash_cookie_name()]) && isset($_COOKIE[$name])) {
+      return $_COOKIE[$name];
+    } else {
+      return null;
+    }
+  }
+  
+  public static function age_flash() {
+    $name = self::flash_cookie_name();
+    
+    if (isset($_COOKIE[$name])) {
+      $value = $_COOKIE[$name] - 1;
+
+      if ($value > 0) {
+        $_COOKIE[$name] = $value;
+        setcookie($name, $value, time() + 30, "/");    
+      } else {
+        unset($_COOKIE[$name]);
+        setcookie($name, null, -1, "/");
+      }
+    }
+  }
+
+  public static function set_flash_value($name, $value) {
+    if ($value) {
+      // 30 seconds seems long enough for a flash value
+      setcookie($name, $value, time() + 30, "/");
+      setcookie(self::flash_cookie_name(), 2, time() + 30, "/");
+    } else {
+      unset($_COOKIE[$name]);
+      setcookie($name, null, -1, '/');
+    }
+  }
+
   public static function handle_post() {
+    // We always want to age the flash, even if this page load isn't a post.
+    // This is just a convenient place to handle this without adding another action.
+    self::age_flash();
+  
     if (form_was_posted(Plugin::PREFIX . 'contactform')) {
       // First check if the honeypot was triggered.
       // Only proceed if it wasn't
@@ -121,9 +172,17 @@ class Shortcode {
       $result .= '<p class="notice">' . self::$message . '</p>';
     }
     
+    // Check and see if there is a "session" error message from the page guard
+    $flash_name = self::error_message_flash_name($contact_form->get('slug'));
+    $flash_value = self::get_flash_value($flash_name);
+    if ($flash_value) {
+      self::$error_message = $flash_value;
+      // self::set_flash_value($flash_name, null);
+    }
+    
     $result .= '<p class="error">';
-    if (isset(self::$error_message) && self::$error_message != '') {
-      $result . self::$error_message;
+    if (isset(self::$error_message) && (self::$error_message != '')) {
+      $result .= self::$error_message;
       $errors = true;
     }
     $result .= '</p>';
@@ -153,7 +212,9 @@ EOF;
 
       $result .= '<textarea id="natural-contact-message" name="message">';
       if ($errors) {
-        $result .= esc_textarea($_POST['message']);
+        if (isset($_POST['message'])) {
+          $result .= esc_textarea($_POST['message']);
+        }
       }
       $result .= '</textarea>';
     }

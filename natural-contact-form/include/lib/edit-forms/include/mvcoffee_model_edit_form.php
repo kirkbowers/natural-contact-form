@@ -23,12 +23,9 @@ class MVCoffeeModelEditForm extends BaseEditForm {
       }
 
       $this->model->set($_POST);
-      // Remember the model in case this instance goes out of scope
-      // $this->set_current_model($this->model);
   
       if ($this->model->validate()) {    
         $this->model->save();
-        error_log(var_export($_POST, true));
         
         if ($this->redirect_on_save) {
           $funcname = $this->redirect_on_save;

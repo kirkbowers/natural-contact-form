@@ -27,6 +27,13 @@ function get_page_guard_fields() {
     'desc' => __( 'This is the page that should be displayed instead if the visitor has not filled out the related contact form.  If this field is left blank, a "404 Page not found" will be displayed.  Otherwise, the broswer will be redirected to the URL supplied.  To redirect to the home page, simply put a forward slash / for this value.', 'natural-contact-form' )
   );
 
+  $fields[] = array(
+    'type' => 'text',
+    'name' => 'com_kirkbowers_naturalcontactform_pageguard_error_message',
+    'title' => __( 'Error Message', 'natural-contact-form' ),
+    'desc' => __( 'The error message to display above the contact form if the Redirect is back to the form guarding this page.  The error message will <em>only</em> display on a page displaying the form with the Contact Form ID above.', 'natural-contact-form' )
+  );
+
   return $fields;
 }
 
@@ -58,10 +65,13 @@ function handle_page_guard_redirect() {
       'com_kirkbowers_naturalcontactform_pageguard_form_slug', true);
     $redirect = get_post_meta($post->ID, 
       'com_kirkbowers_naturalcontactform_pageguard_redirect', true);
+    $error_message = get_post_meta($post->ID, 
+      'com_kirkbowers_naturalcontactform_pageguard_error_message', true);
   
     if ($slug) {
       if(!isset($_COOKIE[Shortcode::cookie_name($slug)])) {
         if ($redirect) {
+          Shortcode::set_flash_error_message($slug, $error_message);
           wp_redirect(home_url($redirect));
           exit();
         } else {

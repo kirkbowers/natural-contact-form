@@ -60,11 +60,23 @@ class Shortcode {
           $to = get_option('admin_email');
           $reply_to = 'Reply-To: ' . $name . ' <' . $email . '>';
     
-          wp_mail($to, $contact_form->get('subject'), $message, array($from, $reply_to));
-      
-          setcookie(self::cookie_name($contact_form->get('slug')), 'true', 
-            time() + (86400 * 30), "/");
-      
+          if ($contact_form->get('page_guard_test_mode')) {
+            // Testing mode, make the cookie expire in just 10 seconds so we can retest
+            // being bounced soon after successfully filling out the form.
+            // Plus, we don't send the mail in testing mode.
+            setcookie(self::cookie_name($contact_form->get('slug')), 'true', 
+              time() + 10, "/");
+          } else {
+            // Not testing mode.
+            
+            // Really send the mail.
+            wp_mail($to, $contact_form->get('subject'), $message, array($from, $reply_to));
+            
+            // Do the default one month expiration on the page guard cookie.
+            setcookie(self::cookie_name($contact_form->get('slug')), 'true', 
+              time() + (86400 * 30), "/");
+          }
+                
           if ($contact_form->get('success_redirect') && preg_match('/\S/', $contact_form->get('success_redirect'))) {
             wp_redirect(get_site_url() . '/' . $contact_form->get('success_redirect'));
             exit;
@@ -102,6 +114,8 @@ class Shortcode {
   
     $result = "";
     $errors = false;
+  
+    $result = '<div class="natural-contact-form-container">';
   
     if (isset(self::$message) && self::$message != '') {
       $result .= '<p class="notice">' . self::$message . '</p>';
@@ -152,6 +166,7 @@ EOF;
       <input type="submit" value="$submit_label">
     </div>
   </form>  
+  </div>
 EOF;
 
     return $result;

@@ -24,7 +24,12 @@ class MetaEditForm extends BaseEditForm {
     if (form_was_posted($this->name)) {
       foreach ($fields as $field) {
         if (in_array($field['type'], $this->fields_with_values)) {
-          update_post_meta($this->post_id, $field['name'], $_POST[$field['name']]);
+          $value = $_POST[$field['name']];
+          if ($value) {
+            update_post_meta($this->post_id, $field['name'], $value);
+          } else {
+            delete_post_meta($this->post_id, $field['name']);
+          }
         }
       } 
     }

@@ -90,8 +90,13 @@ class BaseEditForm {
     // Now, indicate that we're opening our own section
     $this->open_section = true;
     
+    $id = "";
+    if (isset($field['name'])) {
+      $id = 'id="' . $field['name'] . '"';
+    }
+    
     ?>
-    <div class="form_section" id="<?php echo $field['name'] ?>">
+    <div class="form_section" <?php echo $id ?>>
     <?php 
       if (isset($field['title']) && preg_match('/\S/', $field['title'])) {
     ?>

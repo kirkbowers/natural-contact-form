@@ -28,6 +28,8 @@ class MVCoffeeModelEditForm extends BaseEditForm {
   
       if ($this->model->validate()) {    
         $this->model->save();
+        error_log(var_export($_POST, true));
+        
         if ($this->redirect_on_save) {
           $funcname = $this->redirect_on_save;
           wp_redirect($funcname($this->model));

@@ -174,6 +174,12 @@ function display_page_edit_form() {
     'default' => __('Your message has been sent!', 'natural-contact-form')
     
   );
+
+  $form_opts[] = array(
+    'type' => 'checkbox',
+    'name' => 'page_guard_test_mode',
+    'desc' => __('By default, the Page Guard allows a visitor who has filled out the guarding contact form to visit the guarded page for a month after filling out the form. If you are testing a Page Guard, you likely don\'t want to wait a month to retest.  Checking this reduces the time to 10 seconds before resetting the guard.', 'natural-contact-form')
+  );  
   
 ?>
 

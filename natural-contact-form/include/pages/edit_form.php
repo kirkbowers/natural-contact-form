@@ -116,6 +116,7 @@ function display_page_edit_form() {
   $form_opts[] = array(
     'type' => 'checkbox',
     'name' => 'display_message',
+    'desc' => __('If you are using this contact form as an opt-in for a lead magnet, you may not want to ask for a message.  All you need is the name and email address to collect the lead.  Uncheck this box to make the message text area go away for this form.', 'natural-contact-form')
   );
   
   $form_opts[] = array(
@@ -138,14 +139,16 @@ function display_page_edit_form() {
     'type' => 'text',
     'name' => 'sender_email',
     'title' => __('Sender Email', 'natural-contact-form'),
-    'default' => 'donotreply@' . preg_replace('#^www\.#', '', strtolower($_SERVER['SERVER_NAME']))
+    'default' => 'donotreply@' . preg_replace('#^www\.#', '', strtolower($_SERVER['SERVER_NAME'])),
+    'desc' => __('This can be any valid email address, even your own, anything that works so your hosting puts the mail through.  The reply-to on any message you receive will be set correctly as the person who contacted you, so this value is merely a technicality.', 'natural-contact-form')
   );
   
   $form_opts[] = array(
     'type' => 'text',
     'name' => 'subject',
     'title' => __('Subject', 'natural-contact-form'),
-    'default' => sprintf(__('Contact from %s', 'natural-contact-form'), get_bloginfo('name'))
+    'default' => sprintf(__('Contact from %s', 'natural-contact-form'), get_bloginfo('name')),
+    'desc' => __('This will be the subject on all emails you recieve through this form.  If you use multiple contact forms for different purposes, make this unique so you know where the contact came from.', 'natural-contact-form')
   );
   
 
@@ -163,7 +166,7 @@ function display_page_edit_form() {
     'type' => 'text',
     'name' => 'success_redirect',
     'title' => __('Page to visit afterwards', 'natural-contact-form'),
-    'desc' => __('This is the url (without the site domain) of the page to visit after the message has been sent.', 'natural-contact-form')
+    'desc' => __('This is the url (without the site domain) of the page to visit after the message has been sent. If blank, the visitor will remain on the contact form page, but the form will be reset and the "Message to display afterward" will be displayed.', 'natural-contact-form')
   );
       
   $form_opts[] = array(

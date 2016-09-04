@@ -7,7 +7,7 @@ function display_page_all_forms() {
 ?>
   <div class="wrap">
     <h1>Natural Contact Form</h1>
-    <h2><?php _e('All Forms', 'natural-contact-form') ?></h2>
+    <h2><?php _e('All Forms', 'natural-contact-form') ?>&nbsp;<a href="<?php echo new_form_url() ?>" class="page-title-action">New Form</a></h2>
 
     <p>
       <?php _e('Select a contact form below to edit its properties.', 'natural-contact-form') ?>

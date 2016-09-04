@@ -230,7 +230,7 @@ class BaseEditForm {
     <tr>
       <?php $this->render_label($field); ?>
       <td>
-        <textarea name="<?php echo $field['name'] ?>" class="large-text"><?php echo esc_textarea($this->get_defaulted_value_for_field($field)) ?></textarea>
+        <textarea name="<?php echo $field['name'] ?>" class="large-text ncf-textarea"><?php echo esc_textarea($this->get_defaulted_value_for_field($field)) ?></textarea>
     <?php
     if (isset($field['desc'])) {
     ?>

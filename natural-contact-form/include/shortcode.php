@@ -145,6 +145,42 @@ class Shortcode {
     }
   }
 
+  private static function build_css($contact_form) {
+    // I normally hate it when themes or plugins put style tags in the middle of the 
+    // HTML that can't be overridden.  In this case, it makes sense, because it MUST
+    // override everything if set, and it should only appear on the page using a 
+    // particular contact form.  In other words, the styles here should not spill into
+    // other pages.  We don't want to put it in the head of every page.  So adding it
+    // inline makes sense.
+  
+    $result = "<style>\n";
+  
+    $value = $contact_form->get('space_below_text_fields');
+    if ($value) {
+      if (preg_match('/\\d/', substr($value, -1))) {
+        $value .= 'px';
+      }
+        
+      $result .= '  input[type="text"] { margin-bottom: ' . $value . "}\n";
+    }
+  
+    $value = $contact_form->get('space_below_message');
+    if ($value) {
+      if (preg_match('/\\d/', substr($value, -1))) {
+        $value .= 'px';
+      }
+        
+      $result .= '  textarea { margin-bottom: ' . $value . "}\n";
+    }
+  
+    if ($contact_form->get('extra_css')) {
+      $result .= $contact_form->get('extra_css') . "\n";
+    }
+  
+    $result .= "</style>\n";
+    
+    return $result;
+  }
 
   public static function shortcode($args) {  
     $slug = null;
@@ -170,7 +206,9 @@ class Shortcode {
     $result = "";
     $errors = false;
   
-    $result = '<div class="natural-contact-form-container">';
+    $result .= self::build_css($contact_form);
+  
+    $result .= '<div class="natural-contact-form-container">';
   
     if (isset(self::$message) && self::$message != '') {
       $result .= '<p class="notice">' . self::$message . '</p>';

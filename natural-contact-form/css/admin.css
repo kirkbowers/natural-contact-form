@@ -3,6 +3,9 @@
 }
 
 .ncf-panel {
-
   border-bottom: #ccc solid 1px;
+}
+
+.ncf-textarea {
+  height: 150px;
 }

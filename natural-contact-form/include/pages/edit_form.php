@@ -183,6 +183,34 @@ function display_page_edit_form() {
     'name' => 'page_guard_test_mode',
     'desc' => __('By default, the Page Guard allows a visitor who has filled out the guarding contact form to visit the guarded page for a month after filling out the form. If you are testing a Page Guard, you likely don\'t want to wait a month to retest.  Checking this reduces the time to 10 seconds before resetting the guard.', 'natural-contact-form')
   );  
+
+
+  //--------------------------------
+  
+
+  $form_opts[] = array(
+    'type' => 'section',
+    'name' => 'styling',
+    'title' => __('Styling', 'natural-contact-form')
+  );
+      
+  $form_opts[] = array(
+    'type' => 'text',
+    'name' => 'space_below_text_fields',
+    'desc' => __('This is how much space to give below the name and email text fields.  If a simple number is given, the unit is pixels.  You may also supply an explicit unit (eg. "em").', 'natural-contact-form')
+  );
+  
+  $form_opts[] = array(
+    'type' => 'text',
+    'name' => 'space_below_message',
+    'desc' => __('This is how much space to give below the message text area.  If a simple number is given, the unit is pixels.  You may also supply an explicit unit (eg. "em").', 'natural-contact-form')
+  );
+
+  $form_opts[] = array(
+    'type' => 'textarea',
+    'name' => 'extra_css',
+    'desc' => __('Any arbitrary CSS you want to add.', 'natural-contact-form')
+  );
   
 ?>
 

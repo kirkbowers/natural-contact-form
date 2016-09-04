@@ -19,7 +19,7 @@ function display_page_edit_form() {
 
   $form_opts[] = array(
     'type' => 'section',
-    'name' => 'form_appearance',
+    'name' => 'form_title_and_id',
     'title' => __('Form Title and ID', 'natural-contact-form')
   );
   
@@ -185,6 +185,8 @@ function display_page_edit_form() {
 
 
 <h1>Natural Contact Form</h1>
+<div class="wrap">
+
 <h2><?php _e('Edit Form', 'natural-contact-form') ?></h2>
     
     <p><?php _e('The options below set how the contact form will be drawn.  The contact form will
@@ -198,8 +200,13 @@ function display_page_edit_form() {
     
 <?php
 
-  $edit_form->render($form_opts);
+  $edit_form->render($form_opts, "natural-contact-form-tabs");
 
+?>
+
+</div> <!-- class="wrap" -->
+
+<?php
 }
 
 function handle_edit_form_post() {

@@ -102,10 +102,14 @@ class Shortcode {
           $name = sanitize_text_field($name);
        
           $email = sanitize_email($_POST['email']);
-          $message = sanitize_text_field($_POST['message']);
+          
+          $message = "";
+          if (isset($_POST['message'])) {
+            $message = sanitize_text_field($_POST['message']);
       
-          $message = $name . " said:\n\n" . $message;
-      
+            $message = $name . " said:\n\n" . $message;
+          }
+                
           $from = 'From: ' . $name . ' <' . $contact_form->get('sender_email') . '>';
       
           $to = get_option('admin_email');

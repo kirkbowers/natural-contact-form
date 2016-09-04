@@ -9,3 +9,10 @@ function enqueue_scripts() {
 }
 
 add_action('wp_enqueue_scripts', Plugin::namespaced('enqueue_scripts'));
+
+
+function admin_enqueue_scripts() {
+  wp_enqueue_script('natural-contact-form-tabs-script', Plugin::$url . "/js/custom-nav-tabs.js", array(), Plugin::VERSION);
+}
+
+add_action('admin_enqueue_scripts', Plugin::namespaced('admin_enqueue_scripts'));

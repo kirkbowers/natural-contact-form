@@ -39,7 +39,7 @@ class MVCoffeeModelEditForm extends BaseEditForm {
   }
   
   
-  public function render($fields) {
+  public function render($fields, $tabs = false) {
     // $this->handle_post();
   
     $this->open_section = false;
@@ -67,7 +67,7 @@ class MVCoffeeModelEditForm extends BaseEditForm {
   <?php
     }
     
-    $this->render_all_fields($fields);
+    $this->render_all_fields($fields, $tabs);
 
     ?>
   <p class="submit"><input type="submit" name="submit" id="submit" class="button button-primary" value="<?php _e('Save Changes', 'edit-forms') ?>"  /></p>

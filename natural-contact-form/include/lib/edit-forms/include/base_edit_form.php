@@ -47,7 +47,42 @@ class BaseEditForm {
   
   protected $open_section = false;
   
-  protected function render_all_fields($fields) {
+  protected function render_all_fields($fields, $tabs = false) {
+    $this->counter = 0;
+  
+    if ($tabs) {
+    ?>
+        <h2 class="nav-tab-wrapper">
+    <?php
+    
+      foreach ($fields as $field) {
+        if ($field['type'] == 'section') {
+          $id = "";
+          if (isset($field['name'])) {
+            $id = $field['name'];
+          } else {
+            $id = 'tab-' . $this->counter;
+          }
+          
+          $title = "";
+          if (isset($field['title'])) {
+            $title = $field['title'];
+          } else {
+            $title = 'Tab 1' . $this->counter;
+          }
+    ?>
+           <a href="#<?php echo $id ?>" class="nav-tab" id="<?php echo $id ?>-tab"><?php echo $title ?></a>
+     
+    <?php    
+        
+          $this->counter += 1;
+        }
+      }
+    ?>
+      </h2>
+    <?php
+    }
+  
     if ($fields[0]['type'] != 'section') {
       $this->render_section();
     }
@@ -64,8 +99,13 @@ class BaseEditForm {
     // If there is an open section, close it before we close the form.
     if ($this->open_section) {
       echo "    </table>\n";
+      echo "  </div>\n";
     }
-    
+        
+//     if ($tabs) {
+//       echo "</div>\n";
+//     }
+//         
     // This shouldn't make any difference, but let's be thorough
     $this->open_section = false;
   }
@@ -85,6 +125,7 @@ class BaseEditForm {
     // If there is an open section, close it before we open this one.
     if ($this->open_section) {
       echo "    </table>\n";
+      echo "  </div>\n";
     }
     
     // Now, indicate that we're opening our own section
@@ -96,11 +137,11 @@ class BaseEditForm {
     }
     
     ?>
-    <div class="form_section" <?php echo $id ?>>
+    <div class="form_section group" <?php echo $id ?>>
     <?php 
       if (isset($field['title']) && preg_match('/\S/', $field['title'])) {
     ?>
-      <h2><?php echo $field['title'] ?></h2>
+      <h3><?php echo $field['title'] ?></h3>
     <?php
       }
     ?>

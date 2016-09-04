@@ -23,6 +23,11 @@ class BaseEditForm {
     return "";
   }
   
+  protected function get_errors_for_field($field) {
+    // This should be overridden if your subclass form does validation.
+    return null;
+  }
+  
   private function get_defaulted_value_for_field($field) {
     $result = $this->get_value_for_field($field);
     if (null === $result) {
@@ -47,41 +52,72 @@ class BaseEditForm {
   
   protected $open_section = false;
   
+  protected function section_id_attr($field) {
+    $id = "";
+    if (isset($field['name'])) {
+      $id = $field['name'];
+    } else {
+      $id = 'tab-' . $this->counter;
+    }
+
+    return $id;
+  }
+  
   protected function render_all_fields($fields, $tabs = false) {
     $this->counter = 0;
+    $this->section_fields = array();
   
     if ($tabs) {
+      // First, build the fields for sections hash
+      $current_section = '';
+      foreach ($fields as $field) {
+        if ($field['type'] == 'section') {
+          $current_section = $field['name'];
+    
+          $this->section_fields[$current_section] = array();
+        } else {
+          $this->section_fields[$current_section][] = $field['name'];
+        }       
+      }
+    
     ?>
         <h2 class="nav-tab-wrapper">
     <?php
     
+    
       foreach ($fields as $field) {
         if ($field['type'] == 'section') {
-          $id = "";
-          if (isset($field['name'])) {
-            $id = $field['name'];
-          } else {
-            $id = 'tab-' . $this->counter;
-          }
+          $id = $this->section_id_attr($field);
           
           $title = "";
           if (isset($field['title'])) {
             $title = $field['title'];
           } else {
-            $title = 'Tab 1' . $this->counter;
+            $title = 'Tab ' . $this->counter;
           }
+          
+          $error_class = '';
+          if (isset($this->section_fields[$field['name']])) {
+            foreach ($this->section_fields[$field['name']] as $contained_field) {
+              if ($this->get_errors_for_field($contained_field)) {
+                $error_class = 'ncf-error';
+              }
+            }
+          }          
     ?>
-           <a href="#<?php echo $id ?>" class="nav-tab" id="<?php echo $id ?>-tab"><?php echo $title ?></a>
+           <a href="#<?php echo $id ?>" class="nav-tab <?php echo $error_class ?>" id="<?php echo $id ?>-tab"><?php echo $title ?></a>
      
     <?php    
         
           $this->counter += 1;
-        }
+        } 
       }
     ?>
       </h2>
     <?php
     }
+    
+    $this->counter = 0;
   
     if ($fields[0]['type'] != 'section') {
       $this->render_section();
@@ -102,10 +138,6 @@ class BaseEditForm {
       echo "  </div>\n";
     }
         
-//     if ($tabs) {
-//       echo "</div>\n";
-//     }
-//         
     // This shouldn't make any difference, but let's be thorough
     $this->open_section = false;
   }
@@ -131,13 +163,11 @@ class BaseEditForm {
     // Now, indicate that we're opening our own section
     $this->open_section = true;
     
-    $id = "";
-    if (isset($field['name'])) {
-      $id = 'id="' . $field['name'] . '"';
-    }
+    $id = $this->section_id_attr($field);
+    $this->counter += 1;
     
     ?>
-    <div class="form_section group" <?php echo $id ?>>
+    <div class="form_section group" id="<?php echo $id ?>">
     <?php 
       if (isset($field['title']) && preg_match('/\S/', $field['title'])) {
     ?>
@@ -162,9 +192,14 @@ class BaseEditForm {
   public function render_label($field) {
     $label = $this->get_label($field);
   
+    $error_class = '';
+    if ($this->get_errors_for_field($field['name'])) {
+      $error_class = 'class="ncf-error"';
+    }
+    
     ?>
       <th scope="row">
-        <label for="<?php echo $field['name'] ?>"><?php echo $label ?></label>
+        <label for="<?php echo $field['name'] ?>" <?php echo $error_class ?>><?php echo $label ?></label>
       </th>    
     <?php
   }

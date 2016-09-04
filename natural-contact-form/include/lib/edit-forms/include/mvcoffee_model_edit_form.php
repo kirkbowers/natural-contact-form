@@ -12,6 +12,13 @@ class MVCoffeeModelEditForm extends BaseEditForm {
     $this->model_type = $model_type;
   }
   
+  protected function get_errors_for_field($field) {
+    if ($this->model && isset($this->model->errors_for_field[$field])) {
+      return $this->model->errors_for_field[$field];
+    } else {
+      return false;
+    }
+  }
    
   public function handle_post() {
     if (form_was_posted($this->name)) {

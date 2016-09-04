@@ -1,15 +1,14 @@
 /**
- * Custom scripts needed for the colorpicker, image button selectors,
- * and navigation tabs.
+ * Custom script needed for the navigation tabs.
+ *
+ * This code is pilfered from, er, um, inspired by Options Framework.
+ * That's the cool thing about open source, eh?
+ * My deepest gratitude to Devin Price for a truly wonderful plugin.
  */
 
 jQuery(document).ready(function($) {
-
-
-  console.log("looking for nav-tab-wrapper");
 	// Loads tabbed sections if they exist
 	if ( $('.nav-tab-wrapper').length > 0 ) {
-	  console.log("Found one!");
 		options_framework_tabs();
 	}
 
@@ -21,12 +20,10 @@ jQuery(document).ready(function($) {
 
 		// Hides all the .group sections to start
 		$group.hide();
-		console.log("Hid all the groups to start");
 
 		// Find if a selected tab is saved in localStorage
 		if ( typeof(localStorage) != 'undefined' ) {
 			active_tab = localStorage.getItem('natural-contact-form-active_tab');
-			console.log("Old active tab = " + active_tab);
 		}
 
 		// If active tab is saved and exists, load it's .group
@@ -34,7 +31,6 @@ jQuery(document).ready(function($) {
 			$(active_tab).fadeIn();
 			$(active_tab + '-tab').addClass('nav-tab-active');
 		} else {
-		  console.log("fading in first group");
 			$('.group:first').fadeIn();
 			$('.nav-tab-wrapper a:first').addClass('nav-tab-active');
 		}

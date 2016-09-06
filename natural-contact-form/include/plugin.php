@@ -15,6 +15,7 @@ class Plugin {
     'pages/all_forms',
     'pages/new_form',
     'pages/edit_form',
+    'pages/delete_form',
     
     'admin_menu',
     'routes',
@@ -24,9 +25,10 @@ class Plugin {
     'install',
   );
 
-  const ALL_FORMS_SLUG = 'natural_contact_form_all_forms';
-  const NEW_FORM_SLUG  = 'natural_contact_form_new';
-  const EDIT_FORM_SLUG = 'natural_contact_form_edit';
+  const ALL_FORMS_SLUG   = 'natural_contact_form_all_forms';
+  const NEW_FORM_SLUG    = 'natural_contact_form_new';
+  const EDIT_FORM_SLUG   = 'natural_contact_form_edit';
+  const DELETE_FORM_SLUG = 'natural_contact_form_delete';
 
   // ModelEditForm objects need to be remembered throughout the entire request, even
   // though accessed within a couple of callback functions.  They gets stashed here.

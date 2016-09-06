@@ -272,6 +272,8 @@ function display_page_edit_form() {
 
 ?>
 
+    <p class="submitbox"><a href="<?php echo delete_form_url($form) ?>" class="submitdelete deletion"><?php _e('Delete this contact form', 'natural-contact-form') ?></a></p>
+
 </div> <!-- class="wrap" -->
 
 <?php

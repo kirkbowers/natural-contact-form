@@ -29,6 +29,13 @@ function add_menu_pages() {
     'manage_options', 
     Plugin::EDIT_FORM_SLUG, 
     Plugin::namespaced('display_page_edit_form'));
+  add_submenu_page(
+    null, 
+    __("Delete Contact Form", 'natural-contact-page'), 
+    __("Delete Form", 'natural-contact-page'), 
+    'manage_options', 
+    Plugin::DELETE_FORM_SLUG, 
+    Plugin::namespaced('display_page_delete_form'));
 }
 
 add_action('admin_menu', Plugin::namespaced('add_menu_pages'));

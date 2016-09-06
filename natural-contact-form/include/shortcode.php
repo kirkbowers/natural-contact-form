@@ -177,14 +177,7 @@ class Shortcode {
   
     $result = "<style>\n";
   
-  
-   
-//       'message_textarea_width'   => "varchar(32)",
-//     'message_textarea_height'  => "varchar(32)",
-//     'error_message_color'      => "varchar(10)",
-//     'error_label_color'        => "varchar(10)",
-//     'error_text_field_color'   => "varchar(10)",
-
+    // Accumulators for the new style rules.
     $text = array();
     $textarea = array();
     $error_message = array();
@@ -251,6 +244,7 @@ class Shortcode {
       $result .= "}\n";
     }
 
+
     $error_label_color = $contact_form->get('error_label_color');
     if ($error_label_color) {
       self::concat_style($error_label, 'color', self::format_color($error_label_color));
@@ -263,6 +257,7 @@ class Shortcode {
     
       $result .= "}\n";
     }
+
 
     $text_error_color = $contact_form->get('error_text_field_color');
     if ($text_error_color) {
@@ -300,8 +295,8 @@ class Shortcode {
     }
     
     $contact_form = ContactForm::find_by($constraints);
-    // The instance needs a reference to this model record, but I've got a local copy
-    // for convenience since $this-> gets really tedious after a while....
+    // The class needs a reference to this model record, but I've got a local copy
+    // for convenience since self:: gets really tedious after a while....
     self::$contact_form = $contact_form;
   
     if (!$contact_form) {

@@ -71,17 +71,14 @@ class Model {
   static protected function drop_table() {
     global $wpdb;
 
-    error_log("<<< drop_table");
     $table_name = static::table_name();
   
     $charset_collate = $wpdb->get_charset_collate();
 
     $sql = "DROP TABLE IF EXISTS $table_name;";
-    error_log($sql);
   
     $wpdb->query($sql);
 
-    error_log("Done with drop query");
     delete_option(static::version_option_name(), static::VERSION);
   }
     
@@ -482,6 +479,14 @@ class Model {
     } 
     
     return $result;
+  }
+  
+  public static function delete($id) {
+    global $wpdb;
+    
+    $table_name = static::table_name();
+
+    $wpdb->delete( $table_name, array( 'id' => $id ), array( '%d' ) );
   }
 
   

@@ -18,3 +18,13 @@ function edit_form_url($contact_form) {
 
   return admin_url() . "admin.php?page=" . Plugin::EDIT_FORM_SLUG  . "&id=" . $id;
 }
+
+function delete_form_url($contact_form) {
+  if ($contact_form instanceof ContactForm) {
+    $id = $contact_form->id();
+  } else {
+    $id = $contact_form;
+  }
+
+  return admin_url() . "admin.php?page=" . Plugin::DELETE_FORM_SLUG  . "&id=" . $id;
+}

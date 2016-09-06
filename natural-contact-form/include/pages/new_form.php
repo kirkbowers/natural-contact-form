@@ -57,9 +57,10 @@ function display_page_new_form() {
 
 ?>
 
+<div class="wrap">
 
-<h1>Natural Contact Form</h1>
-<h2><?php _e('Create a New Form', 'natural-contact-page') ?></h2>
+  <h1>Natural Contact Form</h1>
+  <h2><?php _e('Create a New Form', 'natural-contact-page') ?></h2>
     
     
     
@@ -67,7 +68,11 @@ function display_page_new_form() {
 <?php
 
   $edit_form->render($form_opts);
+?>
 
+</div>
+
+<?php
 }
 
 function handle_new_form_post() {

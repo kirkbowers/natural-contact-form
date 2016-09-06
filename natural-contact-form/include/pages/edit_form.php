@@ -207,6 +207,43 @@ function display_page_edit_form() {
   );
 
   $form_opts[] = array(
+    'type' => 'text',
+    'name' => 'text_fields_width',
+    'desc' => __('This is how wide at a maximum to make the name and email text fields.  If a simple number is given, the unit is pixels.  You may also supply an explicit unit (eg. "em").', 'natural-contact-form')
+  );
+
+  $form_opts[] = array(
+    'type' => 'text',
+    'name' => 'message_textarea_width',
+    'desc' => __('This is how wide at a maximum to make the textarea for the message field.  If a simple number is given, the unit is pixels.  You may also supply an explicit unit (eg. "em").', 'natural-contact-form')
+  );
+
+  $form_opts[] = array(
+    'type' => 'text',
+    'name' => 'message_textarea_height',
+    'desc' => __('This is how tall to make the textarea for the message field. If a simple number is given, the unit is pixels.  You may also supply an explicit unit (eg. "em").', 'natural-contact-form')
+  );
+
+  $form_opts[] = array(
+    'type' => 'text',
+    'name' => 'error_message_color',
+    'desc' => __('This is the color to make the error message above the contact form, specified in 6 digit hexadecimal (eg. "ff0000" for red). It can be supplied with or without a leading hash ("#ff0000" and "ff0000" are equivalent).', 'natural-contact-form')
+  );
+  
+  $form_opts[] = array(
+    'type' => 'text',
+    'name' => 'error_label_color',
+    'desc' => __('This is the color to make the labels for fields with errors, specified in 6 digit hexadecimal (eg. "ff0000" for red). It can be supplied with or without a leading hash.', 'natural-contact-form')
+  );
+  
+  $form_opts[] = array(
+    'type' => 'text',
+    'name' => 'error_text_field_color',
+    'desc' => __('This is the color to make the borders around the text fields that have errors, specified in 6 digit hexadecimal (eg. "ff0000" for red). It can be supplied with or without a leading hash.', 'natural-contact-form')
+  );
+  
+
+  $form_opts[] = array(
     'type' => 'textarea',
     'name' => 'extra_css',
     'desc' => __('Any arbitrary CSS you want to add.', 'natural-contact-form')
@@ -214,11 +251,11 @@ function display_page_edit_form() {
   
 ?>
 
-
-<h1>Natural Contact Form</h1>
 <div class="wrap">
 
-<h2><?php _e('Edit Form', 'natural-contact-form') ?></h2>
+  <h1>Natural Contact Form</h1>
+
+  <h2><?php _e('Edit Form', 'natural-contact-form') ?></h2>
     
     <p><?php _e('The options below set how the contact form will be drawn.  The contact form will
     appear any place you put the shortcode:', 'natural-contact-form') ?></p>

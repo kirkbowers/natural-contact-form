@@ -145,6 +145,28 @@ class Shortcode {
     }
   }
 
+  private static function px_units($value) {
+    if (preg_match('/\\d/', substr($value, -1))) {
+      $value .= 'px';
+    }    
+
+    return $value;
+  }
+  
+  private static function format_color($value) {
+    if (substr($value, 0, 1) != '#') {
+      $value = '#' . $value;
+    }    
+
+    return $value;
+  }
+  
+  private static function concat_style(&$selector, $rule, $value) {
+    $selector[] = "  $rule: $value;\n";
+  }
+      
+
+
   private static function build_css($contact_form) {
     // I normally hate it when themes or plugins put style tags in the middle of the 
     // HTML that can't be overridden.  In this case, it makes sense, because it MUST
@@ -155,26 +177,109 @@ class Shortcode {
   
     $result = "<style>\n";
   
-    $value = $contact_form->get('space_below_text_fields');
-    if ($value) {
-      if (preg_match('/\\d/', substr($value, -1))) {
-        $value .= 'px';
-      }
-        
-      $result .= '  input[type="text"] { margin-bottom: ' . $value . "}\n";
+  
+   
+//       'message_textarea_width'   => "varchar(32)",
+//     'message_textarea_height'  => "varchar(32)",
+//     'error_message_color'      => "varchar(10)",
+//     'error_label_color'        => "varchar(10)",
+//     'error_text_field_color'   => "varchar(10)",
+
+    $text = array();
+    $textarea = array();
+    $error_message = array();
+    $error_label = array();
+    $error_field = array();
+ 
+    $text_margin = $contact_form->get('space_below_text_fields');
+    $text_width  = $contact_form->get('text_fields_width');
+
+    if ($text_margin) {
+      self::concat_style($text, 'margin-bottom', self::px_units($text_margin));
+    }
+    
+    if ($text_width) {
+      self::concat_style($text, 'max-width', self::px_units($text_width));
+      self::concat_style($text, 'width', '100%');    
+    }
+
+    if ($text) {
+      $result .= "  .natural-contact-form input[type=\"text\"] {\n";
+
+      $result .= implode($text);
+    
+      $result .= "}\n";
     }
   
-    $value = $contact_form->get('space_below_message');
-    if ($value) {
-      if (preg_match('/\\d/', substr($value, -1))) {
-        $value .= 'px';
-      }
-        
-      $result .= '  textarea { margin-bottom: ' . $value . "}\n";
+    $message_margin = $contact_form->get('space_below_message');
+    $message_width  = $contact_form->get('message_textarea_width');
+    $message_height = $contact_form->get('message_textarea_height');
+    
+    if ($message_margin) {
+      self::concat_style($textarea, 'margin-bottom', self::px_units($message_margin));
     }
+    
+    if ($message_width) {
+      self::concat_style($textarea, 'max-width', self::px_units($message_width));
+      self::concat_style($textarea, 'width', '100%');    
+    }
+    
+    if ($message_height) {
+      self::concat_style($textarea, 'height', self::px_units($message_height));
+    }
+
+    if ($textarea) {
+      $result .= "  .natural-contact-form textarea {\n";
+
+      $result .= implode($textarea);
+    
+      $result .= "}\n";
+    }
+
+
+
+    $error_message_color = $contact_form->get('error_message_color');
+    if ($error_message_color) {
+      self::concat_style($error_message, 'color', self::format_color($error_message_color));
+    }
+
+    if ($error_message) {
+      $result .= "  .natural-contact-form-container p.error {\n";
+
+      $result .= implode($error_message);
+    
+      $result .= "}\n";
+    }
+
+    $error_label_color = $contact_form->get('error_label_color');
+    if ($error_label_color) {
+      self::concat_style($error_label, 'color', self::format_color($error_label_color));
+    }
+
+    if ($error_label) {
+      $result .= "  .natural-contact-form label.required-error {\n";
+
+      $result .= implode($error_label);
+    
+      $result .= "}\n";
+    }
+
+    $text_error_color = $contact_form->get('error_text_field_color');
+    if ($text_error_color) {
+      self::concat_style($error_field, 'border-color', self::format_color($text_error_color));
+    }
+
+    if ($error_field) {
+      $result .= "  .natural-contact-form input[type=\"text\"].required-error {\n";
+
+      $result .= implode($error_field);
+    
+      $result .= "}\n";
+    }
+
   
     if ($contact_form->get('extra_css')) {
-      $result .= $contact_form->get('extra_css') . "\n";
+      $result .= stripslashes($contact_form->get('extra_css')) . "\n";
     }
   
     $result .= "</style>\n";
@@ -282,7 +387,7 @@ EOF;
     $value = isset($_POST[$id]) ? $_POST[$id] : '';
     $error_class = '';
     if ($errors && !preg_match('/\S/', $value)) {
-      $error_class = ' required-error';
+      $error_class = ' required-error error';
     }
   
     $result = '<div class="form-label-and-field" id="form-label-and-field-' . $id . '">';

@@ -32,6 +32,11 @@ class MetaEditForm extends BaseEditForm {
           }
         }
       } 
+      
+      // Return true that the form was posted
+      return true;
+    }  else {
+      return false;
     }
   }
 }

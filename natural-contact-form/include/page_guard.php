@@ -42,6 +42,17 @@ function render_page_guard_metabox($post) {
   <p><?php _e('If you would like this page to only be visible after a contact form has been successfully filled out, you can activate the page guard by supplying a "Contact Form ID" here', 'natural-contact-form') ?></p>
   
 <?php
+
+  $slug = get_post_meta($post->ID, 
+    'com_kirkbowers_naturalcontactform_pageguard_form_slug', true);
+  if ($slug) {
+    if (! ContactForm::find_by(array('slug' => $slug))) {  
+?>
+  <p><?php _e('WARNING: The Contact Form ID supplied does not match any contact form in the system. <strong>This page is not being guarded!</strong>') ?>
+  </p>  
+<?php
+    }
+  }  
   
   $form = new \com\kirkbowers\editforms\MetaEditForm(
     'com_kirkbowers_naturalcontactform_pageguard', $post->ID);
@@ -54,7 +65,41 @@ function handle_page_guard_form_post($post_id) {
   $form = new \com\kirkbowers\editforms\MetaEditForm(
     'com_kirkbowers_naturalcontactform_pageguard', $post_id);
 
-  $form->handle_post(get_page_guard_fields());
+  $was_posted = $form->handle_post(get_page_guard_fields());
+  
+  
+  if ($was_posted) {
+    $slug = $_POST['com_kirkbowers_naturalcontactform_pageguard_form_slug'];
+   
+    if (! ContactForm::find_by(array('slug' => $slug))) {
+      update_option(Plugin::PREFIX . 'page_guard_error_slug', $slug);
+    } 
+  }
+}
+
+function display_page_guard_error() {
+  $slug = get_option(Plugin::PREFIX . 'page_guard_error_slug');
+  if ($slug) {
+    $title = __("Page Guard", 'natural-contact-form');
+    $message = sprintf( 
+      __('The Contact Form ID "%1$s" does not match any contact form in the system.
+         <strong>This page is not being guarded!</strong> Please check the spelling 
+         of the ID %2$shere%3$s.', 'natural-contact-form'), 
+      $slug, 
+      '<a href="' . all_forms_url() . '" target="_new">', 
+      '</a>');
+?>
+    <div class="notice notice-error is-dismissible">
+      <h2><?php echo $title ?></h2>
+      <p>
+        <?php echo $message ?>
+      </p>
+    </div>
+
+<?php
+  
+    update_option(Plugin::PREFIX . 'page_guard_error_slug', null);
+  }
 }
 
 function handle_page_guard_redirect() {
@@ -86,3 +131,5 @@ function handle_page_guard_redirect() {
 add_action( 'add_meta_boxes_page', Plugin::namespaced('add_page_guard_metabox') );
 add_action( 'save_post', Plugin::namespaced('handle_page_guard_form_post'));
 add_action( 'template_redirect', Plugin::namespaced('handle_page_guard_redirect'));
+add_action( 'admin_notices', Plugin::namespaced('display_page_guard_error'));
+

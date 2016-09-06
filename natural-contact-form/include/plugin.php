@@ -36,7 +36,7 @@ class Plugin {
 
   public static $url;
   public static $path;
-
+  
   /**
    * The PHP namespace mechanism is the preferred way to make the names of classes and
    * functions unique from those in other plugins.  However, there are still places that

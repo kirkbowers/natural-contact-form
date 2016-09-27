@@ -299,4 +299,16 @@ class BaseEditForm {
     <input type="hidden" name="<?php echo $field['name'] ?>" value="<?php echo $this->get_defaulted_value_for_field($field) ?>">
     <?php
   }
+  
+  
+  public function render_placeholder($field) {
+    ?>
+    <tr id="<?php echo $field['name'] ?>">
+      <?php $this->render_label($field); ?>
+      <td class="placeholder">
+      </td>
+    </tr>
+    <?php
+  }
+
 }

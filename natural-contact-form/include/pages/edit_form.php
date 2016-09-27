@@ -249,6 +249,37 @@ function display_page_edit_form() {
     'desc' => __('Any arbitrary CSS you want to add.', 'natural-contact-form')
   );
   
+
+  //--------------------------------
+  
+
+  $form_opts[] = array(
+    'type' => 'section',
+    'name' => 'email_list_integration',
+    'title' => __('Email List Integration', 'natural-contact-form')
+  );
+  
+  $form_opts[] = array(
+    'type' => 'radio',
+    'name' => 'email_list_provider',
+    'default' => 'none',
+    'values' => array(
+      array(
+        'name' => 'none',
+        'title' => __('None', 'natural-contact-form')
+      ),
+      array (
+        'name' => 'MailChimp',
+        'title' => __('MailChimp', 'natural-contact-form')
+      )
+    )
+  );
+  
+  $form_opts[] = array(
+    'type' => 'placeholder',
+    'name' => 'email_list_settings',
+  );
+  
 ?>
 
 <div class="wrap">

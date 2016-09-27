@@ -13,7 +13,7 @@ class ContactForm extends \org\mvcoffee\Model {
     return  Plugin::PREFIX . 'contact_forms_version';
   }
   
-  const VERSION = '0.1.4';
+  const VERSION = '0.1.5';
 
   static protected $fields = array(
     'title'                => 'tinytext NOT NULL',
@@ -42,7 +42,10 @@ class ContactForm extends \org\mvcoffee\Model {
     'error_message_color'      => "varchar(10)",
     'error_label_color'        => "varchar(10)",
     'error_text_field_color'   => "varchar(10)",
-    'extra_css'                => "longtext"
+    'extra_css'                => "longtext",
+    
+    'email_list_provider'      => "varchar(32) DEFAULT 'none'",
+    'email_list_settings'      => "longtext",
   );
 
 }

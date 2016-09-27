@@ -6,7 +6,8 @@ class Plugin {
 
   private static $libs = array(
     'mvcoffee-wp',
-    'edit-forms'
+    'edit-forms',
+    'MailChimp',
   );
 
   private static $files = array(

@@ -71,7 +71,7 @@ class ArrayFieldEditForm extends BaseEditForm {
         
         if ($this->redirect_on_save) {
           $funcname = $this->redirect_on_save;
-          wp_redirect($funcname($this->model));
+          wp_redirect($funcname($this->containing_model));
           exit;
         }
       } else {

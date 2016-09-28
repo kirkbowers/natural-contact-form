@@ -31,9 +31,8 @@ class NaturalContactForm.MailChimp extends NaturalContactForm.EmailProvider
       @$cell.html( 
         """
         <p>
-          There are settings for MailChimp.
-          <a href="#{ admin_url }admin.php?page=natural_contact_form_mailchimp_api_key&id=#{ contact_form_id }">
-          Configure</a>
+          <a href="#{ admin_url }admin.php?page=natural_contact_form_mailchimp_settings&id=#{ contact_form_id }">
+          View/Edit settings for MailChimp.</a>
         </p>
         """ 
       )

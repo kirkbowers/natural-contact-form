@@ -14,6 +14,7 @@ function display_page_mailchimp_api_key_form() {
   }
   // Hang onto this ref for shorthand
   $form = $mailchimp_api_key_form->containing_model;
+  $form_url = edit_form_url($form);
     
   $form_opts = array();
   
@@ -32,7 +33,7 @@ function display_page_mailchimp_api_key_form() {
 
   <h2><?php _e('MailChimp Integration', 'natural-contact-form') ?></h2>
     
-    <p><?php echo sprintf( __('Please enter the API Key for the MailChimp account for which you wish to associate the contact form %s.', 'natural-contact-form'), $form->get('title') ) ?></p>
+    <p><?php echo sprintf( __('Please enter the API Key for the MailChimp account for which you wish to associate the contact form <a href="' . $form_url . '" >%s</a>.', 'natural-contact-form'), $form->get('title') ) ?></p>
        
 
 <?php
@@ -58,6 +59,9 @@ function handle_mailchimp_api_key_form_post() {
     );
   // Stash the reference away for use by display_page_edit_form above
   Plugin::$mailchimp_api_key_form = $mailchimp_api_key_form;
+  
+  $mailchimp_api_key_form->redirect_on_save = 
+    Plugin::namespaced('mailchimp_settings_form_url');
   
   $mailchimp_api_key_form->handle_post();
 }

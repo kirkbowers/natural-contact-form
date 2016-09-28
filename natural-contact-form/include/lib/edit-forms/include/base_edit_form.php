@@ -138,9 +138,11 @@ class BaseEditForm {
       echo "    </table>\n";
       echo "  </div>\n";
     }
-        
-    echo "</div> <!-- class='ncf-panel' -->\n";
-        
+       
+    if ($tabs) {
+      echo "</div> <!-- class='ncf-panel' -->\n";
+    }
+          
     // This shouldn't make any difference, but let's be thorough
     $this->open_section = false;
   }

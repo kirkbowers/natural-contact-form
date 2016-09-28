@@ -28,3 +28,23 @@ function delete_form_url($contact_form) {
 
   return admin_url() . "admin.php?page=" . Plugin::DELETE_FORM_SLUG  . "&id=" . $id;
 }
+
+function mailchimp_api_key_form_url($contact_form) {
+  if ($contact_form instanceof ContactForm) {
+    $id = $contact_form->id();
+  } else {
+    $id = $contact_form;
+  }
+
+  return admin_url() . "admin.php?page=" . Plugin::MAILCHIMP_API_KEY_FORM_SLUG  . "&id=" . $id;
+}
+
+function mailchimp_settings_form_url($contact_form) {
+  if ($contact_form instanceof ContactForm) {
+    $id = $contact_form->id();
+  } else {
+    $id = $contact_form;
+  }
+
+  return admin_url() . "admin.php?page=" . Plugin::MAILCHIMP_SETTINGS_FORM_SLUG  . "&id=" . $id;
+}

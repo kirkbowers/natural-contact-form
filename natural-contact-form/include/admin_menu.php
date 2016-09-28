@@ -44,6 +44,13 @@ function add_menu_pages() {
     'manage_options', 
     Plugin::MAILCHIMP_API_KEY_FORM_SLUG, 
     Plugin::namespaced('display_page_mailchimp_api_key_form'));
+  add_submenu_page(
+    null, 
+    __("Set MailChimp Settings", 'natural-contact-page'), 
+    __("MailChimp Settings Form", 'natural-contact-page'), 
+    'manage_options', 
+    Plugin::MAILCHIMP_SETTINGS_FORM_SLUG, 
+    Plugin::namespaced('display_page_mailchimp_settings_form'));
 }
 
 add_action('admin_menu', Plugin::namespaced('add_menu_pages'));

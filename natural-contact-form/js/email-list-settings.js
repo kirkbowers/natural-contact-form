@@ -36,7 +36,7 @@ NaturalContactForm.MailChimp = (function(superClass) {
     contact_form_id = this.from_server.contact_form_id;
     if (settings) {
       console.log("Settings = " + JSON.stringify(settings));
-      this.$cell.html("<p>\n  There are settings for MailChimp.\n  <a href=\"" + admin_url + "admin.php?page=natural_contact_form_mailchimp_api_key&id=" + contact_form_id + "\">\n  Configure</a>\n</p>");
+      this.$cell.html("<p>\n  <a href=\"" + admin_url + "admin.php?page=natural_contact_form_mailchimp_settings&id=" + contact_form_id + "\">\n  View/Edit settings for MailChimp.</a>\n</p>");
     } else {
       console.log("There are no settings");
       this.$cell.html("<p>\n  There are no settings for MailChimp.\n  <a href=\"" + admin_url + "admin.php?page=natural_contact_form_mailchimp_api_key&id=" + contact_form_id + "\">\n  Configure</a>\n</p>");

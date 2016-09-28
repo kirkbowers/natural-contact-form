@@ -3,6 +3,7 @@ namespace com\kirkbowers\editforms;
 
 class ArrayFieldEditForm extends BaseEditForm {
   public $redirect_on_save = null;
+  public $successful_save = false;
 
   public $model = null;
   public $model_type = null;
@@ -69,11 +70,12 @@ class ArrayFieldEditForm extends BaseEditForm {
         $this->containing_model->set(array($this->field => $value));
         $this->containing_model->save();
         
+        $this->successful_save = true;
         if ($this->redirect_on_save) {
           $funcname = $this->redirect_on_save;
           wp_redirect($funcname($this->containing_model));
           exit;
-        }
+        } 
       } else {
       
       }

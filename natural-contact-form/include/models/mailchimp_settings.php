@@ -4,6 +4,10 @@ namespace com\kirkbowers\naturalcontactform;
 class MailChimpSettings extends \org\mvcoffee\ArrayField {
   static protected $fields = array(
     'apikey',
+    'list',
+    'name_merge_field',
+    'first_name_merge_field',
+    'last_name_merge_field'
   );
   
   public function check_apikey($value) {

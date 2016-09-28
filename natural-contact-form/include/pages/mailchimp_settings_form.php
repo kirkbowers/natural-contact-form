@@ -38,37 +38,64 @@ function display_page_mailchimp_settings_form() {
     
     
   $form_opts = array();
+
+  if ($lists) {
+    $list_values = array();
+    foreach ($lists as $list) {
+      $list_values[] = array(
+        'name' => $list['id'],
+        'title' => $list['name']
+      );
+    }
+
+    $form_opts[] = array(
+      'type' => 'radio',
+      'name' => 'list',
+      'values' => $list_values,
+      'default' => $list_values[0]['name']
+    );
+    
+    $form_opts[] = array(
+      'type' => 'text',
+      'name' => 'name_merge_field',
+      'default' => 'NAME',
+      'desc' => __('The MailChimp identifier for a list member\'s name.', 'natural-contact-form')
+    );
   
-  $form_opts[] = array(
-    'type' => 'text',
-    'name' => 'name_merge_field',
-    'default' => 'NAME',
-    'desc' => __('The MailChimp identifier for a list member\'s name.', 'natural-contact-form')
-  );
+    $form_opts[] = array(
+      'type' => 'text',
+      'name' => 'first_name_merge_field',
+      'default' => 'FNAME',
+      'desc' => __('The MailChimp identifier for a list member\'s first name.', 'natural-contact-form')
+    );
   
-  $form_opts[] = array(
-    'type' => 'text',
-    'name' => 'first_name_merge_field',
-    'default' => 'FNAME',
-    'desc' => __('The MailChimp identifier for a list member\'s first name.', 'natural-contact-form')
-  );
-  
-  $form_opts[] = array(
-    'type' => 'text',
-    'name' => 'last_name_merge_field',
-    'default' => 'LNAME',
-    'desc' => __('The MailChimp identifier for a list member\'s last name.', 'natural-contact-form')
-  );
-  
+    $form_opts[] = array(
+      'type' => 'text',
+      'name' => 'last_name_merge_field',
+      'default' => 'LNAME',
+      'desc' => __('The MailChimp identifier for a list member\'s last name.', 'natural-contact-form')
+    );
+  }  
   
 ?>
-
+    
 <div class="wrap">
+
 
   <h1>Natural Contact Form</h1>
 
   <h2><?php _e('MailChimp Integration', 'natural-contact-form') ?></h2>
-    
+
+<?php
+  if ($mailchimp_settings_form->successful_save) {
+?>
+  <div class="notice notice-success is-dismissible">
+    <p>MailChimp settings saved.</p>
+  </div>
+<?php
+  }
+?>
+
     <p><?php echo sprintf( __('MailChimp integration settings associated with the contact form <a href="' . $form_url . '" >%s</a>.', 'natural-contact-form'), $form->get('title') ) ?></p>
        
 <?php

@@ -131,6 +131,9 @@ class Shortcode {
             setcookie(self::cookie_name($contact_form->get('slug')), 'true', 
               time() + (86400 * 30), "/");
           }
+          
+          // Do email service provider integration
+          self::handle_email_service($contact_form);
                 
           if ($contact_form->get('success_redirect') && preg_match('/\S/', $contact_form->get('success_redirect'))) {
             wp_redirect(get_site_url() . '/' . $contact_form->get('success_redirect'));
@@ -280,6 +283,49 @@ class Shortcode {
     $result .= "</style>\n";
     
     return $result;
+  }
+  
+  public static function handle_email_service($contact_form) {
+    $provider = $contact_form->get('email_list_provider');
+    if ($provider == 'MailChimp') {
+      $settings = $contact_form->get('email_list_settings');
+      if (isset($settings['MailChimp'])) {
+        $settings = $settings['MailChimp'];
+      } else {
+        return;
+      }
+            
+      try {
+        $mailchimp = new \DrewM\MailChimp\MailChimp($settings['apikey']);
+      
+        $list_id = $settings['list'];
+
+        $values = array(
+          'email_address' => sanitize_email($_POST['email']),
+          'status'        => 'pending'
+        );
+      
+        $merge_fields = array();
+      
+        if ($contact_form->get('name_fields') == 'first-and-last') {
+          $merge_fields[ $settings['first_name_merge_field'] ] = 
+            sanitize_text_field($_POST['first_name']);
+          $merge_fields[ $settings['last_name_merge_field'] ] = 
+            sanitize_text_field($_POST['last_name']);
+        } else {
+          $merge_fields[ $settings['name_merge_field'] ] = 
+            sanitize_text_field($_POST['contact_name']);
+        }
+      
+        $values['merge_fields'] = $merge_fields;
+
+        $result = $mailchimp->post("lists/$list_id/members", $values);
+      
+        error_log("MailChimp add email to list: " . var_export($result, true));
+      } catch (\Exception $e) {
+        error_log("MailChimp add email threw exception: " . $e);
+      }
+    }
   }
 
   public static function shortcode($args) {  

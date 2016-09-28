@@ -153,19 +153,30 @@ class Validatable {
       // To mimic ActiveRecord and MVCoffee, we need to do all the possible tests,
       // like 'numericality', plus the option of a custom test by function name.
       // I don't need that for this plugin, so I can defer it...
-
+      
+      else {
+        $function = array($this, $test);
+        if (isset($options['message'])) {
+          $message = $options['message'];
+        } else {
+          $message = '%s is invalid';
+        }
+        
+        if (! $function($value)) {
+          $this->_add_error($field, $message, $options);
+        }
+      }
     }
     
     return $this->is_valid();
   }
-  
+    
   private function _add_error($field, $message, $options) {
     $name = static::display_for_field($field);
     
-    // TODO:
-    // Do something with the options.  To mimic ActiveRecord and MVCoffee, we'd have to
-    // respect custom messages.  I don't need that for the Natural Contact Form plugin,
-    // so I can defer that until such a day as I do need it...
+    if (isset($options['message'])) {
+      $message = $options['message'];
+    }
     $error_message = sprintf(__($message, 'mvcoffee-wp'), $name);
     
     $this->errors[] = $error_message;

@@ -32,7 +32,7 @@ function display_page_mailchimp_api_key_form() {
 
   <h2><?php _e('MailChimp Integration', 'natural-contact-form') ?></h2>
     
-    <p><?php sprintf( _e('Please enter the API Key for the MailChimp account for which you wish to associate the contact form %s', 'natural-contact-form'), $form->get('title') ) ?></p>
+    <p><?php echo sprintf( __('Please enter the API Key for the MailChimp account for which you wish to associate the contact form %s.', 'natural-contact-form'), $form->get('title') ) ?></p>
        
 
 <?php

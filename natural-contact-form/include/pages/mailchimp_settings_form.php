@@ -105,7 +105,14 @@ function display_page_mailchimp_settings_form() {
 
 <?php
 
-    $mailchimp_settings_form->render($form_opts);
+    if ($lists) {
+      $mailchimp_settings_form->render($form_opts);
+    } else {
+?>
+    <p><strong>There are no email lists for this account.</strong>  Please log onto <a href="http://www.mailchimp.com" target="_mailchimp">MailChimp</a> and create a list.</p>
+    
+<?php    
+    }
   } else {
 ?>
 

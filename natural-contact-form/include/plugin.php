@@ -12,11 +12,13 @@ class Plugin {
 
   private static $files = array(
     'models/contact_form',
+    'models/mailchimp_settings',
   
     'pages/all_forms',
     'pages/new_form',
     'pages/edit_form',
     'pages/delete_form',
+    'pages/mailchimp_api_key_form',
     
     'admin_menu',
     'routes',
@@ -31,11 +33,14 @@ class Plugin {
   const EDIT_FORM_SLUG   = 'natural_contact_form_edit';
   const DELETE_FORM_SLUG = 'natural_contact_form_delete';
 
+  const MAILCHIMP_API_KEY_FORM_SLUG = 'natural_contact_form_mailchimp_api_key';
+
   // ModelEditForm objects need to be remembered throughout the entire request, even
   // though accessed within a couple of callback functions.  They gets stashed here.
   public static $edit_contact_form_form;
   public static $new_contact_form_form;
   public static $page_guard_form;
+  public static $mailchimp_api_key_form;
 
   public static $url;
   public static $path;

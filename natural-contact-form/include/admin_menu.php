@@ -36,6 +36,14 @@ function add_menu_pages() {
     'manage_options', 
     Plugin::DELETE_FORM_SLUG, 
     Plugin::namespaced('display_page_delete_form'));
+
+  add_submenu_page(
+    null, 
+    __("Set MailChimp API Key", 'natural-contact-page'), 
+    __("MailChimp API Key Form", 'natural-contact-page'), 
+    'manage_options', 
+    Plugin::MAILCHIMP_API_KEY_FORM_SLUG, 
+    Plugin::namespaced('display_page_mailchimp_api_key_form'));
 }
 
 add_action('admin_menu', Plugin::namespaced('add_menu_pages'));

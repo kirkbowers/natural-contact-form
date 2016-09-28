@@ -25,7 +25,9 @@ if ( defined( 'ABSPATH' ) && ! class_exists( '\org\mvcoffee\Model' ) )
   load_plugin_textdomain('mvcoffee-wp', false, $dir . '/languages' );
 
   $files = array(
-    'model'
+    'validatable',
+    'model',
+    'array_field',
   );
 
   $path = plugin_dir_path( __FILE__ );

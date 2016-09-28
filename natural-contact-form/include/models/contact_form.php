@@ -52,6 +52,7 @@ class ContactForm extends \org\mvcoffee\Model {
 
 ContactForm::types('display_message'     , 'boolean');
 ContactForm::types('page_guard_test_mode', 'boolean');
+ContactForm::types('email_list_settings' , 'array'  );
 
 ContactForm::displays('title'             , 'Contact Form Title');
 ContactForm::displays('slug'              , 'Contact Form id');

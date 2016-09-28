@@ -307,6 +307,18 @@ function display_page_edit_form() {
 
 </div> <!-- class="wrap" -->
 
+<script id="natural_contact_form_json" type="text/json">
+  <?php
+
+ echo json_encode(array(
+   'admin_url' => admin_url(),
+   'contact_form_id' => $form->id(),
+   'email_list_settings' => $form->get('email_list_settings'),
+  ));
+   
+  ?>    
+</script>
+
 <?php
 }
 

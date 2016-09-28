@@ -28,6 +28,7 @@ if ( defined( 'ABSPATH' ) && ! class_exists( '\com\kirkbowers\editforms\BaseEdit
     'base_edit_form',
     'meta_edit_form',
     'mvcoffee_model_edit_form',
+    'array_field_edit_form'
   );
 
   $path = plugin_dir_path( __FILE__ );

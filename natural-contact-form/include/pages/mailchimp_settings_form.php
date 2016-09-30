@@ -35,8 +35,7 @@ function display_page_mailchimp_settings_form() {
   } catch (\Exception $e) {
     $account_name = '';
   }
-    
-    
+   
   $form_opts = array();
 
   if ($lists) {

@@ -34,3 +34,9 @@ Typically the "thank you" page displayed after a contact form is a regular WordP
 
 The "Page Guard" features allows you to require that a particular contact form be filled in successfully before displaying the guarded page.  If direct navigation is attempted, the visitor will either be shown a 404 or be bounced to a different page (likely the home or the contact page), depending on the settings.  Behind the scenes, this is handled with a cookie.  The contact form sets the cookie, and if the "thank you" page doesn't find the required cookie, the visitor is redirected.
 
+## Optional integration with popular Email Service Providers
+
+If you want to be contacted directly through an opt-in so you can follow up with new subscribers personally, contact forms can be configured to serve as both a "contact me" and an email list sign up.
+
+Currently MailChimp is supported.  Other email providers coming soon!
+

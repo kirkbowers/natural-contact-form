@@ -1,6 +1,19 @@
 <?php
 namespace org\mvcoffee;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+/**
+ * Validatable is the base class of any kind of Object Relational Model (ORM) that needs
+ * to provide Rails ActiveRecord-style self-validation meta-programming methods.
+ * 
+ * It doesn't quite provide the true "Class Macro" style `validates` method that Rails
+ * does, as PHP doesn't allow for code execution during class declaration.  However, it
+ * provides a close approximation: Class Macros that are called immediately _after_ 
+ * class declaration.  This way Rails (and MVCoffee) style validations can be provided.
+ */
 class Validatable {
   
   protected static $types_hash    = array();

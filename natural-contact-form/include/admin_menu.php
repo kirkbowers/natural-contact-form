@@ -1,6 +1,15 @@
 <?php
 namespace com\kirkbowers\naturalcontactform;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+/**
+ * Adds all the menu choices for this plugin in the right nav of the WordPress 
+ * dashboard.  Also registers the pages that are not accessible via the menu but are
+ * linked to within the plugin's backend.
+ */
 function add_menu_pages() {
   add_menu_page(
     'Natural Contact Form', 

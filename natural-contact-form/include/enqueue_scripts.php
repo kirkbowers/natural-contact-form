@@ -1,6 +1,11 @@
 <?php
 namespace com\kirkbowers\naturalcontactform;
 
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 function enqueue_scripts() {
   wp_enqueue_style('natural-contact-form-style', Plugin::$url . "/css/style.css", array(), Plugin::VERSION);
 

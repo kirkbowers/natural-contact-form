@@ -1,6 +1,18 @@
 <?php
 namespace com\kirkbowers\editforms;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+/**
+ * This class provides an easy way to build an input form for an array field within 
+ * a larger model.  It's for editing a model within a model.  Array fields are 
+ * eventually serialized to be stored in the database.  This class needs a reference to
+ * the ORM model of the array field in question, plus a reference to the ORM model of 
+ * the containing model, the actual database table in which this serialized array is to 
+ * be stored.
+ */
 class ArrayFieldEditForm extends BaseEditForm {
   public $redirect_on_save = null;
   public $successful_save = false;

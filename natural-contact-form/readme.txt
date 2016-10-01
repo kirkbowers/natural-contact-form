@@ -9,6 +9,8 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Natural Contact Form provides contact forms that are easy to create and use.  The email messages you receive from your site's visitors are formatted like regular emails and set up so you can just "Reply" naturally.
 
+(Requires PHP version 5.3 or greater.)
+
 == Description ==
 
 Natural Contact Form provides contact forms that are easy to create and use.  Unlike general purpose form generators, it focuses on one thing (contact forms) and does it well.

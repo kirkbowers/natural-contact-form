@@ -1,6 +1,15 @@
 <?php
 namespace com\kirkbowers\naturalcontactform;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+/**
+ * This file handles setting up the meta box to allow editing the page guard settings.
+ * It also handles the actual page guarding on the front end, performing the redirect
+ * it the required cookie isn't present.
+ */
 function add_page_guard_metabox() {
   add_meta_box( 
     'com_kirkbowers_naturalcontactform_pageguard',

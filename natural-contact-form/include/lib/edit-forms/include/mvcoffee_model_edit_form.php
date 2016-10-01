@@ -1,6 +1,20 @@
 <?php
 namespace com\kirkbowers\editforms;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+/**
+ * This class is somewhat ambitiously named.  MVCoffee is a model-view-controller 
+ * framework originally developed in CoffeeScript for the Rails ecosystem.  It provides
+ * models on the client that mirror Rails ActiveRecord models closely, with the same
+ * mechanism for validations and foreign key associations.  A full ActiveRecord/
+ * MVCoffee implementation in PHP/WordPress is beyond the scope of the Natural Contact
+ * Form plugin, but the functionality that is needed by this plugin is realized.
+ * This class provides a mechanism for creating input forms to edit PHP MVCoffee-style
+ * models and have them validate and save themselves.
+ */
 class MVCoffeeModelEditForm extends BaseEditForm {
   public $redirect_on_save = null;
 

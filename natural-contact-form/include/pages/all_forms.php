@@ -1,6 +1,10 @@
 <?php
 namespace com\kirkbowers\naturalcontactform;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 function display_page_all_forms() {
   $forms = ContactForm::all(array('title', 'slug'));
 

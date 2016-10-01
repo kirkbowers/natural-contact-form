@@ -1,6 +1,16 @@
 <?php
 namespace com\kirkbowers\naturalcontactform;
 
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+/**
+ * The Shortcode class handles rendering the front end contact forms when the shortcode
+ * is found, and handles submission of the contact form, sending mail and optionally
+ * opting into an email list.
+ */
 class Shortcode {
   private static $message = '';
   private static $error_message = '';

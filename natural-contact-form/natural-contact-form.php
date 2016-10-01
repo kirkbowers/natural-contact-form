@@ -1,9 +1,9 @@
 <?php
 /**
  * Plugin Name: Natural Contact Form
- * Plugin URI: http://kirkbowers.com/wordpress/naturalcontactform
- * Description: Provides a simple contact form with minimal customization, honey pot spam  protection, and a natural format for the email message that makes replying to easy.
- * Version: 0.2.0
+ * Plugin URI: http://www.kirkbowers.com/plugins/natural-contact-form/
+ * Description: Provides contact forms that are easy to create and use.  The email messages you receive from your site's visitors are formatted like regular emails and set up so you can just "Reply" naturally.
+ * Version: 1.0.0
  * Author: Kirk Bowers
  * Author URI: http://kirkbowers.com
  * License: GPLv2

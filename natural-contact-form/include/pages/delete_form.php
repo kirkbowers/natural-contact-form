@@ -1,6 +1,10 @@
 <?php
 namespace com\kirkbowers\naturalcontactform;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 function display_page_delete_form() {
   $form = ContactForm::find($_GET['id']);
   

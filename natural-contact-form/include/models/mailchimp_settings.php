@@ -1,6 +1,15 @@
 <?php
 namespace com\kirkbowers\naturalcontactform;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+/**
+ * MailChimpSettings is a model within a model.  It provides a Rails-inspired ORM of the
+ * array stored in the ContactForm email_list_settings field when MailChimp is used as
+ * the email provider.
+ */
 class MailChimpSettings extends \org\mvcoffee\ArrayField {
   static protected $fields = array(
     'apikey',

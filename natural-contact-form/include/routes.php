@@ -1,6 +1,15 @@
 <?php
 namespace com\kirkbowers\naturalcontactform;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+/**
+ * This file creates helper functions for building URL routes to the various pages
+ * in the plugin's backend.  These helpers are inspired by Rails' *_path and *_url
+ * functions.
+ */
 function all_forms_url() {
   return admin_url() . "admin.php?page=" . Plugin::ALL_FORMS_SLUG;
 }

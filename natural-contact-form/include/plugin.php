@@ -1,8 +1,19 @@
 <?php
 namespace com\kirkbowers\naturalcontactform;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+/**
+ * The Plugin class is the ringmaster for the whole plugin.  It loads all the other files
+ * and libraries needed to run the plugin.  It also is the holder of "global" values
+ * that are needed at different points in the WordPress page load life cycle.  Holding 
+ * those values here as static variables inside a namespaced class is safer than making
+ * them truly global.
+ */
 class Plugin {
-  const VERSION = '0.2.0';
+  const VERSION = '1.0.0';
 
   private static $libs = array(
     'mvcoffee-wp',
@@ -38,8 +49,8 @@ class Plugin {
   const MAILCHIMP_API_KEY_FORM_SLUG = 'natural_contact_form_mailchimp_api_key';
   const MAILCHIMP_SETTINGS_FORM_SLUG = 'natural_contact_form_mailchimp_settings';
 
-  // ModelEditForm objects need to be remembered throughout the entire request, even
-  // though accessed within a couple of callback functions.  They gets stashed here.
+  // The edit form objects need to be remembered throughout the entire request, even
+  // though accessed within a couple of callback functions.  They get stashed here.
   public static $edit_contact_form_form;
   public static $new_contact_form_form;
   public static $page_guard_form;

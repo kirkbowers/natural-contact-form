@@ -1,6 +1,10 @@
 <?php
 namespace com\kirkbowers\naturalcontactform;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 function display_page_mailchimp_api_key_form() {
   // The plugin is guarenteed to have a reference to an existing edit form because it
   // is instantiated in `handle_edit_form_post` below, which is called on `init`.

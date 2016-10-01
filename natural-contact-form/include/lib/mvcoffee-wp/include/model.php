@@ -1,6 +1,10 @@
 <?php
 namespace org\mvcoffee;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 /**
  * This is admittedly a bit of overkill for this plugin as there is only one derived 
  * model from this base class, but it paves the way for a more general purpose solution

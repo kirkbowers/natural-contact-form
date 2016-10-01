@@ -1,6 +1,14 @@
 <?php
 namespace com\kirkbowers\editforms;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+/**
+ * This class provides an easy way to create an input form of meta values on an
+ * "Edit Page" screen in the WordPress dashboard.
+ */
 class MetaEditForm extends BaseEditForm {
   public $post_id;
   

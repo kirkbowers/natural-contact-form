@@ -1,5 +1,13 @@
 <?php
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+/**
+ * This file simply provides shortcuts for putting a nonce and form marker into an html
+ * form and for checking the existence (and validaty) of those markers.
+ */
 function echo_form_post_marker($name) {
   echo get_form_post_marker($name);
 }

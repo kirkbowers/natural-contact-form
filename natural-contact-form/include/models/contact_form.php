@@ -1,6 +1,15 @@
 <?php
 namespace com\kirkbowers\naturalcontactform;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+/**
+ * ContactForm is the Rails-inspired ORM representation of the the Contact Form database
+ * table.  Most of the magic is in the meta-programming methods at the bottom that 
+ * handling typing and validating the individual fields.
+ */
 class ContactForm extends \org\mvcoffee\Model {
   // This is a long table name, and with WordPress's table prefix it will be longer,
   // but it's < 50 characters.  Unless WP has an over 14 character prefix, we should be
@@ -13,7 +22,7 @@ class ContactForm extends \org\mvcoffee\Model {
     return  Plugin::PREFIX . 'contact_forms_version';
   }
   
-  const VERSION = '0.1.5';
+  const VERSION = '1.0.0';
 
   static protected $fields = array(
     'title'                => 'tinytext NOT NULL',

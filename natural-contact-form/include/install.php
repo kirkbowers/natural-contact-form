@@ -1,6 +1,15 @@
 <?php
 namespace com\kirkbowers\naturalcontactform;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+/**
+ * This file handles setting up the default contact form that should exist upon activation.
+ * Also handles upgrading the database tables used by the plugin when they change as well
+ * as removing such tables upon deactivation.
+ */
 function install() {
   ContactForm::install();
 
@@ -32,5 +41,4 @@ function uninstall() {
   ContactForm::uninstall();
 }
 
-// add_action('plugins_loaded', Plugin::namespaced('ContactForm::upgrade'));
 add_action('admin_init', Plugin::namespaced('ContactForm::upgrade'));

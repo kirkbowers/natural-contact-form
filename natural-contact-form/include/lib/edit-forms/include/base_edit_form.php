@@ -1,6 +1,15 @@
 <?php
 namespace com\kirkbowers\editforms;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+/**
+ * BaseEditForm is the foundation for everything in this sub-plugin.  It gives an array
+ * based mechanism for specifying the fields to appear in an input form and renders those
+ * fields into HTML in a general purpose, WordPress dashboard-styled manner.
+ */
 class BaseEditForm {
   
   //===============================================================================

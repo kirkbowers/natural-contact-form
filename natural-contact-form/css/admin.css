@@ -1,0 +1,11 @@
+.ncf-error {
+  color: #dc3232;
+}
+
+.ncf-panel {
+  border-bottom: #ccc solid 1px;
+}
+
+.ncf-textarea {
+  height: 150px;
+}

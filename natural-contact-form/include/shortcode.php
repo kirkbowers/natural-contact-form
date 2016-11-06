@@ -114,10 +114,15 @@ class Shortcode {
           $email = sanitize_email($_POST['email']);
           
           $message = "";
-          if (isset($_POST['message'])) {
-            $message = sanitize_text_field($_POST['message']);
+          if (isset($_POST['phone'])) {
+            $phone = sanitize_text_field($_POST['phone']);
       
-            $message = $name . " said:\n\n" . $message;
+            $message .= "Phone number: " . $phone . "\n\n";
+          }
+          if (isset($_POST['message'])) {
+            $inmessage = sanitize_text_field($_POST['message']);
+      
+            $message .= $name . " said:\n\n" . $inmessage;
           }
                 
           $from = 'From: ' . $name . ' <' . $contact_form->get('sender_email') . '>';
@@ -133,7 +138,9 @@ class Shortcode {
               time() + 10, "/");
           } else {
             // Not testing mode.
-            
+          
+          error_log($message);
+          
             // Really send the mail.
             wp_mail($to, $contact_form->get('subject'), $message, array($from, $reply_to));
             
@@ -399,6 +406,9 @@ EOF;
       $result .= self::labeledText('contact_name', $contact_form->get('name_label'), $errors);
     }
     $result .= self::labeledText('email', $contact_form->get('email_label'), $errors);
+    if ($contact_form->get('display_phone')) {
+      $result .= self::labeledText('phone', $contact_form->get('phone_label'), $errors);
+    }
     $result .= self::labeledText('website', 'Website', $errors);
   
     $result .= <<<EOF

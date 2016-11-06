@@ -113,6 +113,17 @@ function display_page_edit_form() {
   
   $form_opts[] = array(
     'type' => 'text',
+    'name' => 'phone_label',
+    'default' => 'Phone'
+  );
+  
+  $form_opts[] = array(
+    'type' => 'checkbox',
+    'name' => 'display_phone',
+  );
+  
+  $form_opts[] = array(
+    'type' => 'text',
     'name' => 'message_label',
     'default' => 'Message'
   );

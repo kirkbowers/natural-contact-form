@@ -115,9 +115,16 @@ Naturally!
 = 1.0.0 =
 * Initial release
 
+= 1.1.0 =
+* Added an option phone number field to the contact form
+
 == Upgrade Notice ==
 
 = 1.0.0 =
 Initial release, nothing to upgrade!
+
+= 1.1.0 =
+The "Phone" field will default to "off".  Upgrade will be backwards compatible.
+
 
 

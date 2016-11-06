@@ -22,7 +22,7 @@ class ContactForm extends \org\mvcoffee\Model {
     return  Plugin::PREFIX . 'contact_forms_version';
   }
   
-  const VERSION = '1.0.0';
+  const VERSION = '1.1.0';
 
   static protected $fields = array(
     'title'                => 'tinytext NOT NULL',
@@ -34,6 +34,8 @@ class ContactForm extends \org\mvcoffee\Model {
     'first_name_label'     => "varchar(128) DEFAULT 'First Name'",
     'last_name_label'      => "varchar(128) DEFAULT 'Last Name'",
     'email_label'          => "varchar(128) DEFAULT 'Email'",
+    'display_phone'        => "tinyint NOT NULL DEFAULT 0",
+    'phone_label'          => "varchar(128) DEFAULT 'Phone'",
     'display_message'      => "tinyint NOT NULL DEFAULT 1",
     'message_label'        => "varchar(128) DEFAULT 'Message'",
     'submit_label'         => "varchar(128) DEFAULT 'Submit'",
@@ -59,6 +61,7 @@ class ContactForm extends \org\mvcoffee\Model {
 
 }
 
+ContactForm::types('display_phone'       , 'boolean');
 ContactForm::types('display_message'     , 'boolean');
 ContactForm::types('page_guard_test_mode', 'boolean');
 ContactForm::types('email_list_settings' , 'array'  );

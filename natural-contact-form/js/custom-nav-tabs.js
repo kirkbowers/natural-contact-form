@@ -13,7 +13,6 @@ jQuery(document).ready(function($) {
 	}
 
 	function options_framework_tabs() {
-
 		var $group = $('.group'),
 			$navtabs = $('.nav-tab-wrapper a'),
 			active_tab = '';
@@ -27,7 +26,7 @@ jQuery(document).ready(function($) {
 		}
 
 		// If active tab is saved and exists, load it's .group
-		if ( active_tab != '' && $(active_tab).length ) {
+		if ( (active_tab !== '') && $(active_tab).length ) {
 			$(active_tab).fadeIn();
 			$(active_tab + '-tab').addClass('nav-tab-active');
 		} else {

@@ -2,7 +2,7 @@
 Contributors: kirkbowers
 Tags: contact form,page guard,spam protection,email,MailChimp,opt in,optin
 Requires at least: 3.1.0
-Tested up to: 4.6.1
+Tested up to: 4.8
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html

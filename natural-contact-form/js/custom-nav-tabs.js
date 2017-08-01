@@ -13,19 +13,22 @@ jQuery(document).ready(function($) {
 	}
 
 	function options_framework_tabs() {
+	  console.log('starting options_framework_tabs');
 		var $group = $('.group'),
-			$navtabs = $('.nav-tab-wrapper a'),
+			$navtabs = $('.nfc-nav-tab-wrapper a'),
 			active_tab = '';
 
 		// Hides all the .group sections to start
 		$group.hide();
 
+		active_tab = '';
+
 		// Find if a selected tab is saved in localStorage
 		if ( typeof(localStorage) != 'undefined' ) {
 			active_tab = localStorage.getItem('natural-contact-form-active_tab');
+		  console.log('got local storage ' + active_tab);
 		}
 
-		active_tab = '';
 		// If active tab is saved and exists, load it's .group
 		if ( (active_tab !== '') && $(active_tab).length ) {
 			$(active_tab).fadeIn();
@@ -37,7 +40,7 @@ jQuery(document).ready(function($) {
 
 		// Bind tabs clicks
 		$navtabs.click(function(e) {
-
+      console.log('click on a tab');
 			e.preventDefault();
 
 			// Remove active class from all tabs

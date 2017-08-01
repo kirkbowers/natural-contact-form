@@ -123,6 +123,8 @@ class Shortcode {
             $inmessage = sanitize_text_field($_POST['message']);
       
             $message .= $name . " said:\n\n" . $inmessage;
+          } else {
+            $message .= $contact_form->get('subject');
           }
                 
           $from = 'From: ' . $name . ' <' . $contact_form->get('sender_email') . '>';
@@ -138,9 +140,6 @@ class Shortcode {
               time() + 10, "/");
           } else {
             // Not testing mode.
-          
-          error_log($message);
-          
             // Really send the mail.
             wp_mail($to, $contact_form->get('subject'), $message, array($from, $reply_to));
             

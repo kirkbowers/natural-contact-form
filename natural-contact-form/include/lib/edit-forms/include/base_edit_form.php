@@ -90,7 +90,7 @@ class BaseEditForm {
       }
     
     ?>
-        <h2 class="nav-tab-wrapper">
+        <h2 class="nfc-nav-tab-wrapper">
     <?php
     
     

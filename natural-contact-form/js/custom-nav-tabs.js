@@ -8,7 +8,7 @@
 
 jQuery(document).ready(function($) {
 	// Loads tabbed sections if they exist
-	if ( $('.nav-tab-wrapper').length > 0 ) {
+	if ( $('.nfc-nav-tab-wrapper').length > 0 ) {
 		options_framework_tabs();
 	}
 
@@ -25,6 +25,7 @@ jQuery(document).ready(function($) {
 			active_tab = localStorage.getItem('natural-contact-form-active_tab');
 		}
 
+		active_tab = '';
 		// If active tab is saved and exists, load it's .group
 		if ( (active_tab !== '') && $(active_tab).length ) {
 			$(active_tab).fadeIn();
@@ -55,5 +56,4 @@ jQuery(document).ready(function($) {
 
 		});
 	}
-
 });

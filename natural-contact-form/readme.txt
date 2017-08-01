@@ -116,7 +116,8 @@ Naturally!
 * Initial release
 
 = 1.1.0 =
-* Added an option phone number field to the contact form
+* Added an optional phone number field to the contact form.
+* Fixed a minor incompatibility with WooCommerce.
 
 == Upgrade Notice ==
 

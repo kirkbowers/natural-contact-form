@@ -1,10 +1,6 @@
 # natural-contact-form
 
-Natural Contact Form is a WordPress plugin providing easy to create and use contact forms that let you reply to inbound messages naturally.
-
-It is currently in development... coming soon!
-
-It is usable as is by dropping the source into your `wp-content/plugins` directory (I'm using it on several sites that way currently), but it has not yet been vetted and published by WordPress and is not being versioned.
+Natural Contact Form is a WordPress plugin providing contact forms that are easy to create and use. The email messages you receive from your site's visitors are formatted like regular emails and set up so you can just "Reply" naturally.
 
 Features include:
 

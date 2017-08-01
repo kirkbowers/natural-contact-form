@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * them truly global.
  */
 class Plugin {
-  const VERSION = '1.0.0';
+  const VERSION = '1.1.0';
 
   private static $libs = array(
     'mvcoffee-wp',

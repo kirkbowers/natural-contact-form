@@ -8,18 +8,19 @@
 
 jQuery(document).ready(function($) {
 	// Loads tabbed sections if they exist
-	if ( $('.nav-tab-wrapper').length > 0 ) {
+	if ( $('.nfc-nav-tab-wrapper').length > 0 ) {
 		options_framework_tabs();
 	}
 
 	function options_framework_tabs() {
-
 		var $group = $('.group'),
-			$navtabs = $('.nav-tab-wrapper a'),
+			$navtabs = $('.nfc-nav-tab-wrapper a'),
 			active_tab = '';
 
 		// Hides all the .group sections to start
 		$group.hide();
+
+		active_tab = '';
 
 		// Find if a selected tab is saved in localStorage
 		if ( typeof(localStorage) != 'undefined' ) {
@@ -27,7 +28,7 @@ jQuery(document).ready(function($) {
 		}
 
 		// If active tab is saved and exists, load it's .group
-		if ( active_tab != '' && $(active_tab).length ) {
+		if ( (active_tab !== '') && $(active_tab).length ) {
 			$(active_tab).fadeIn();
 			$(active_tab + '-tab').addClass('nav-tab-active');
 		} else {
@@ -37,7 +38,6 @@ jQuery(document).ready(function($) {
 
 		// Bind tabs clicks
 		$navtabs.click(function(e) {
-
 			e.preventDefault();
 
 			// Remove active class from all tabs
@@ -56,5 +56,4 @@ jQuery(document).ready(function($) {
 
 		});
 	}
-
 });

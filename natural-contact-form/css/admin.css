@@ -4,6 +4,8 @@
 
 .ncf-panel {
   border-bottom: #ccc solid 1px;
+  clear: left;
+  padding-top: 10px;
 }
 
 .ncf-textarea {

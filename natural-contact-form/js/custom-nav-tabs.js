@@ -13,7 +13,6 @@ jQuery(document).ready(function($) {
 	}
 
 	function options_framework_tabs() {
-	  console.log('starting options_framework_tabs');
 		var $group = $('.group'),
 			$navtabs = $('.nfc-nav-tab-wrapper a'),
 			active_tab = '';
@@ -26,7 +25,6 @@ jQuery(document).ready(function($) {
 		// Find if a selected tab is saved in localStorage
 		if ( typeof(localStorage) != 'undefined' ) {
 			active_tab = localStorage.getItem('natural-contact-form-active_tab');
-		  console.log('got local storage ' + active_tab);
 		}
 
 		// If active tab is saved and exists, load it's .group
@@ -40,7 +38,6 @@ jQuery(document).ready(function($) {
 
 		// Bind tabs clicks
 		$navtabs.click(function(e) {
-      console.log('click on a tab');
 			e.preventDefault();
 
 			// Remove active class from all tabs
